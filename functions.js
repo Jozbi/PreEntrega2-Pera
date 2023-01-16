@@ -1,5 +1,4 @@
 //Funcion para comprobar si el usuario ingresa el dato solicitado.
-
 function comprobarIngreso(frase, a, b){
     while(true) {
         let ingresoDelUsuario = prompt(
@@ -25,5 +24,50 @@ function listaEnString(lista){
     return listaFinal;
 }
 
-//Funcion para agregar item en la lista
+// Funcion para poner en mayuscula la primer letra
+function convertirString(palabra){
+    let palabraFinal = palabra.toLowerCase();
+    palabraFinal = palabraFinal[0].toUpperCase() + palabraFinal.slice(1);
+    return palabraFinal;
+}
 
+//Funcion para comprobar existencia item en la lista
+function existeProducto(ingreso) {
+    for (let i=0; i < stockProductos.length; i++){
+        if (stockProductos[i]._nombre === ingreso){
+            return stockProductos[i];
+        }
+    }
+}
+
+//Funcion para buscar un producto en la lista
+function buscarProducto() {
+    let buscandoProducto;
+    let resultadoBusqueda;
+    buscandoProducto = prompt('Ingrese el nombre del producto que desea buscar.');
+    buscandoProducto = convertirString(buscandoProducto);
+    resultadoBusqueda = existeProducto(buscandoProducto);
+    if(resultadoBusqueda === undefined){
+        alert('No existe')
+        buscarProducto();
+    } else {
+        alert(resultadoBusqueda.toString());
+        console.log(resultadoBusqueda);
+        itemAgregar.push(resultadoBusqueda);
+    }
+}
+
+//Funcion para agregar al carrito
+
+function deseaComprar(){
+    let decisionUsuario = comprobarIngreso('Desea agregar un producto al carrito? (SI o NO)', 'si', 'no');
+    if (decisionUsuario === 'si'){
+        buscarProducto();
+        carritoActual.agregarProductos(itemAgregar[itemAgregar.length - 1]);
+        deseaComprar();
+    } else if (decisionUsuario === 'no'){
+        alert('Muchas gracias por confiar en nosotros.')
+    }
+}
+
+//Funcion para agregar al carrito 

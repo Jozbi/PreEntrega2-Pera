@@ -22,14 +22,9 @@ class Producto {
 class Carrito {
     static contadorCarrito = 0;
 
-    static get MAX_PRODUCTOS() {
-        return 3;
-    }
-
     constructor(){
         this._idCarrito = ++Carrito.contadorCarrito;
         this._productos = [];
-        this._productosEnCarrito = 0;
     }
 
     get idCarrito() {
@@ -37,40 +32,44 @@ class Carrito {
     }
 
     agregarProductos(producto) {
-        if (this._productosEnCarrito < Carrito.MAX_PRODUCTOS){
-            this._productos.push(producto);
-            this._productosEnCarrito = this._productos.length;
-        } else {
-            alert('Carrito Lleno')
-        }
+        this._productos.push(producto);
     }
 
     calcularTotal() {
         let totalPresupuesto = 0;
         for(let producto of this._productos){
-            totalPresupuesto += producto.precio;
+            totalPresupuesto += Number(producto._precio);
         }
         return totalPresupuesto;
     }
 
     mostrarCarrito() {
         let carrito = '';
-        for (let i = 0; i < this._productos.length; i++){
-            carrito += this._productos[i].toString();
+        if (this._productos.length === 0){
+            alert('Su carrito total es de 0. Hasta la proxima.');
+            document.write(`<h2>Su carrito total es de 0. Hasta la proxima.</h2>`)
+        } else {
+            for (let i = 0; i < this._productos.length; i++){
+                carrito += this._productos[i].toString();
+            }
+            alert(`Orden: ${this._idCarrito}. Total: $${this.calcularTotal()}. Productos: \n${carrito}.`)
+            document.write(`<h2>Orden: ${this._idCarrito}. Total: $${this.calcularTotal()}.</h2><h3>Productos:</h3> <h4>${carrito}</h4>.`)
         }
-        console.log(`Orden: ${this._idCarrito}. Total: $${this.calcularTotal()}. Productos: ${carrito}.`)
     }
 }
+//Item a modificar
+let itemModificado;
 
 //Carrito
 let carritoActual = new Carrito;
+let itemAgregar = [];
 
 //Lista de Productos Pre-Definida
 let stockProductos = [
-    new Producto('Lemon Pie', 1000),
-    new Producto('Tarta Frutilla', 1000),
-    new Producto('Cheesecake', 2000),
-    new Producto('Drip Cake', 3000)
+    new Producto('Silla', 1000),
+    new Producto('Mesa', 1500),
+    new Producto('Ropero', 2000),
+    new Producto('Cama', 2500)
 ];
 
 /**Primer Decision
@@ -81,12 +80,19 @@ let primerDecision = comprobarIngreso('Si desea armar un carrito ingrese "COMPRA
 /**CAMINO SI ELIJE ARMAR UN CARRITO DE COMPRAS
  * Desea ver la lista completa o buscar un producto
  */
-
 if (primerDecision === 'comprar'){
     let items = comprobarIngreso('Desea ver la lista completa de items?(SI o NO)', 'si', 'no');
     if (items === 'si'){
         alert(listaEnString(stockProductos));
-        
+        deseaComprar();
     }
+    else {
+        deseaComprar();
+    } 
+}
+
+newFunction();
+function newFunction() {
+    carritoActual.mostrarCarrito();
 }
 
