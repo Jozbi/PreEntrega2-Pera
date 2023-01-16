@@ -15,7 +15,7 @@ class Producto {
     }
 
     toString() {
-        return `Codigo-Producto: ${this.idProducto}; Nombre: ${this._nombre}; Precio: $${this._precio}. `
+        return `Codigo-Producto: ${this.idProducto}; Nombre: ${this._nombre}; Precio: $${this._precio}\n `
     }
 }
 //CLASE CARRITO
@@ -62,12 +62,31 @@ class Carrito {
     }
 }
 
+//Carrito
+let carritoActual = new Carrito;
+
 //Lista de Productos Pre-Definida
-const stockProductos = [
+let stockProductos = [
     new Producto('Lemon Pie', 1000),
     new Producto('Tarta Frutilla', 1000),
     new Producto('Cheesecake', 2000),
     new Producto('Drip Cake', 3000)
 ];
 
-//
+/**Primer Decision
+ * Armar carrito O Modificar lista existente
+ */
+let primerDecision = comprobarIngreso('Si desea armar un carrito ingrese "COMPRAR". Si desea modificar la lista de productos ingrese "MODIFICAR".', 'comprar', 'modificar');
+
+/**CAMINO SI ELIJE ARMAR UN CARRITO DE COMPRAS
+ * Desea ver la lista completa o buscar un producto
+ */
+
+if (primerDecision === 'comprar'){
+    let items = comprobarIngreso('Desea ver la lista completa de items?(SI o NO)', 'si', 'no');
+    if (items === 'si'){
+        alert(listaEnString(stockProductos));
+        
+    }
+}
+
