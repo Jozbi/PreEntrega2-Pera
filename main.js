@@ -85,11 +85,11 @@ if (primerDecision === 'comprar'){
     if (items === 'si'){
         alert(listaEnString(stockProductos));
         deseaComprar();
-        newFunction();
+        mostrarElCarrito();
     }
     else {
         deseaComprar();
-        newFunction();
+        mostrarElCarrito();
     } 
 } 
 //CAMINO SI ELIJE MODIFICAR LA LISTA DE PRODUCTOS

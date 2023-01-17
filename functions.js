@@ -95,6 +95,6 @@ function eliminarProducto(){
     } 
 
 //Funcion para mostrar carrito
-function newFunction() {
+function mostrarElCarrito() {
     carritoActual.mostrarCarrito();
 }
