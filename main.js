@@ -57,8 +57,6 @@ class Carrito {
         }
     }
 }
-//Item a modificar
-let itemModificado;
 
 //Carrito
 let carritoActual = new Carrito;
