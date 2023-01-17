@@ -85,14 +85,30 @@ if (primerDecision === 'comprar'){
     if (items === 'si'){
         alert(listaEnString(stockProductos));
         deseaComprar();
+        newFunction();
     }
     else {
         deseaComprar();
+        newFunction();
     } 
+} 
+//CAMINO SI ELIJE MODIFICAR LA LISTA DE PRODUCTOS
+else if (primerDecision === 'modificar'){
+    let accionUsuario = comprobarIngreso('Desea agregar o eliminar un producto? (AGREGAR O ELIMINAR)', 'agregar', 'eliminar');
+    switch (accionUsuario) {
+        case 'agregar':
+            agregarProducto();
+            alert('La lista actualizada quedo de la siguiente manera:');
+            alert(listaEnString(stockProductos));
+            alert('Muchas Gracias.');
+            document.write(`<h2>${stockProductos}</h2>`);
+            break;
+        case 'eliminar':
+            eliminarProducto();
+            document.write(`<h2>${stockProductos}</h2>`);
+            break;
+    }
 }
 
-newFunction();
-function newFunction() {
-    carritoActual.mostrarCarrito();
-}
+
 
